@@ -37,3 +37,31 @@ def ingest_data(data: Telemetry):
     df.to_csv(CSV_PATH, mode='a', header=False, index=False)
 
     return {"status": "success", "message": "Telemetry stored"}
+
+from fastapi import FastAPI, Request
+import csv
+import os
+
+# ---- existing code ----
+
+EDGE_CSV = "edge_health.csv"
+
+if not os.path.exists(EDGE_CSV):
+    with open(EDGE_CSV, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["timestamp", "temperature", "vibration", "pressure", "ml_anomaly", "MHI"])
+
+@app.post("/edge_health")
+async def edge_health(request: Request):
+    data = await request.json()
+    with open(EDGE_CSV, "a", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            data.get("timestamp"),
+            data.get("temperature"),
+            data.get("vibration"),
+            data.get("pressure"),
+            data.get("ml_anomaly"),
+            data.get("MHI")
+        ])
+    return {"status": "edge data stored"}
