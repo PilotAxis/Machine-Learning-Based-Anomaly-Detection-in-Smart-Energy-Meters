@@ -7,7 +7,7 @@ import os
 app = FastAPI()
 
 # CSV file to store telemetry
-CSV_PATH = "/Users/ahmedmajid/Desktop/Digital-Twin-for Smart-Energy-Meters/digital-twin-mvp/data/telemetry.csv"
+CSV_PATH = "/Users/ahmedmajid/Desktop/Digital-Twin-for Smart-Energy-Meters/digital-twin-mvp/data/meter.csv"
 
 # Create CSV with headers if it doesn't exist
 if not os.path.exists(CSV_PATH):

@@ -6,7 +6,7 @@ import plotly.graph_objs as go
 import os
 
 # Paths to CSV files generated earlier
-TELEMETRY_CSV = "/Users/ahmedmajid/Desktop/Digital-Twin-for Smart-Energy-Meters/digital-twin-mvp/data/telemetry.csv"
+TELEMETRY_CSV = "/Users/ahmedmajid/Desktop/Digital-Twin-for Smart-Energy-Meters/digital-twin-mvp/data/meter.csv"
 EDGE_CSV = "/Users/ahmedmajid/Desktop/Digital-Twin-for Smart-Energy-Meters/digital-twin-mvp/data/edge_health.csv"
 
 app = dash.Dash(__name__)

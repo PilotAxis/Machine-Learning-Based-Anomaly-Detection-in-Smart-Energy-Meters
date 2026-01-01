@@ -20,14 +20,24 @@ WINDOW = 5  # rolling window size
 # API where edge device sends summarized health data
 API_URL = "http://127.0.0.1:8000/edge_health"
 
-# === FUNCTIONS ===
+# Load meter data CSV once
+csv_path = "/Users/ahmedmajid/Desktop/Digital-Twin-for Smart-Energy-Meters/digital-twin-mvp/data/meter.csv"
+meter_df = pd.read_csv(csv_path)
+csv_index = 0
 
 def generate_sensor_data():
-    """Simulate real sensor data (replace with real sensors later)."""
+    global csv_index
+
+    if csv_index >= len(meter_df):
+        csv_index = 0  # loop back to start
+
+    row = meter_df.iloc[csv_index]
+    csv_index += 1
+
     return {
-        "temperature": round(random.uniform(30, 80), 2),
-        "vibration": round(random.uniform(0.1, 2.5), 2),
-        "pressure": round(random.uniform(90, 120), 2)
+        "temperature": float(row["temperature"]),
+        "vibration": float(row["vibration"]),
+        "pressure": float(row["pressure"])
     }
 
 def compute_sensor_risk(temp, vib, pres):
